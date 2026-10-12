@@ -1,10 +1,12 @@
 const express = require('express');
-const session = require('express-session');
 
 const app = express();
 const port = 3000;
 
+const reportRoutes = require('./src/reports/report_routes.js');
+
 app.use(express.json());
+app.use('/reports', reportRoutes);
 
 app.get('/hello', (req, res) => {
     res.status(200).json({message: "hello, server activated!"});
