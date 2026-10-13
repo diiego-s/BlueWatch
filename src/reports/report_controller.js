@@ -3,14 +3,22 @@ const queries = require('./report_queries');
 
 const getReportbyId = (req, res) => {
     const id = parseInt(req.params.id);
-    console.log("Requested ID:", id);
     pool.query(queries.getReportbyId, [id], (error, result) => {
-        if(error) throw error;
-        console.log("DB Rows found:", result.rows);
+        if(error) res.status(500).json({ error: "Internal error of the database" });
         res.status(200).json(result.rows);
     })
 }
 
+const postReport = (req, res) => {
+    const {id, description, type, volunteerid, missionid} = req.body;
+    pool.query(queries.postReport, [id, description, type, volunteerid, missionid], (error, result) => {
+        if(error) res.status(500).json({ error: "Internal error of the database" });
+        if(result.rowCount === 0) res.status(400).json({error: "error creating report"});
+        else res.status(201).json(result.rows[0]);
+    })
+}
+
 module.exports = {
-    getReportbyId
+    getReportbyId,
+    postReport
 };
