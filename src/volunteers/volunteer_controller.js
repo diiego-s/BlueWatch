@@ -1,6 +1,15 @@
 const pool = require('../../db');
 const queries = require('./volunteer_queries');
 
+const getVolunteerbyId = (req, res) =>{
+    const id = parseInt(req.params.id);
+    pool.query(queries.getVolunteerbyId, [id], (error, result) => {
+        if(result.rowCount === 0) res.status(404).json({message: "Volunteer not found"})
+        if(error) res.status(500).json({error: "internal server error"});
+        res.status(200).json(result.rows);
+    })
+}
+
 const postVolunteer = (req, res) => {
     const {id, name, surname} = req.body;
     pool.query(queries.postVolunteer, [id, name, surname], (error, result) => {
@@ -10,5 +19,6 @@ const postVolunteer = (req, res) => {
 }
 
 module.exports = {
+    getVolunteerbyId,
     postVolunteer
 }
