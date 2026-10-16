@@ -15,7 +15,7 @@ app.use('/volunteers', volunteerRoutes);
 
 //EXAMPLE 0
 app.get('/hello', (req, res) => {
-    res.status(200).json({message: "hello, server activated!"});
+    res.status(200).json({message: "Hello, server activated!"});
 });
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
