@@ -5,10 +5,10 @@ const getVolunteerbyId = (req, res) =>{
     const id = parseInt(req.params.id);
     pool.query(queries.getVolunteerbyId, [id], (error, result) => {
         if(result.rowCount === 0) 
-            res.status(404).json({message: "Volunteer not found"})
+            return res.status(404).json({message: "Volunteer not found"})
         if(error) 
-            res.status(500).json({error: "internal server error"});
-        res.status(200).json(result.rows);
+            return res.status(500).json({error: "Internal server error"});
+        return res.status(200).json(result.rows);
     })
 }
 
@@ -17,14 +17,14 @@ const postVolunteer = (req, res) => {
     const {id, name, surname} = req.body;
     pool.query(queries.getVolunteerbyId, [id], (errorC, resultC) => {
         if(resultC.rowCount > 0) 
-            res.status(409).json({message: "Volunteer already exists"});
+            return res.status(409).json({message: "Volunteer already exists"});
         if(errorC) 
-            res.status(500).json({error: "internal server error"});
+            return res.status(500).json({error: "Internal server error"});
     
         pool.query(queries.postVolunteer, [id, name, surname], (error, result) => {
             if(error) 
-                res.status(500).json({error: "internal server error"});
-            res.status(201).json({message: "volunteer created!"});
+                return res.status(500).json({error: "Internal server error"});
+            res.status(201).json({message: "Volunteer created!"});
         })
     })
 }
