@@ -29,7 +29,22 @@ const postVolunteer = (req, res) => {
     })
 }
 
+//EXAMPLE 4
+const putVolunteer = (req, res) => {
+    const id = parseInt(req.params.id);
+    const {name, surname} = req.body;
+
+    pool.query(queries.putVolunteer, [name, surname, id], (error, result) => {
+        if (error)
+            return res.status(500).json({ error: "internal server error" });
+        if (result.rowCount === 0)
+            return res.status(404).json({ error: "Volunteer not found" });
+        return res.status(200).json(result.rows[0]);
+    });
+}
+
 module.exports = {
     getVolunteerbyId,
-    postVolunteer
+    postVolunteer,
+    putVolunteer
 }
