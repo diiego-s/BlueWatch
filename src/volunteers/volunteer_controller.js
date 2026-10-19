@@ -44,13 +44,14 @@ const putVolunteer = (req, res) => {
     });
 };
 
+//EXERCISE 2
 const getVolunteerbyMission = (req,res) => {
     const mission_id = parseInt(req.params.id);
     pool.query(mission_queries.getMissionbyId, [mission_id], (errorM, resultM) => {
-        if(errorM) { console.log(errorM); return res.status(500).json({error: "Internal Server Error"});}
+        if(errorM) return res.status(500).json({error: "Internal Server Error"});
         if(resultM.rowCount === 0) return res.status(404).json({message: "Mission not found"});
         pool.query(queries.getVolunteerbyMission, [mission_id], (errorV, resultV) => {
-        if(errorV) { console.log(errorV); return res.status(500).json({error: "Internal Server Error"});}
+        if(errorV) return res.status(500).json({error: "Internal Server Error"});
             if(resultV.rowCount === 0) return res.status(404).json({message: "No Volunteer found for that mission"});
             else return res.status(200).json(resultV.rows);
         })
