@@ -3,14 +3,15 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const reportRoutes = require('./src/reports/report_routes.js');
-const missionRoutes = require('./src/missions/mission_routes.js');
-const volunteerRoutes = require('./src/volunteers/volunteer_routes.js')
-
 app.use(express.json());
 
+const reportRoutes = require('./src/reports/report_routes.js');
 app.use('/reports', reportRoutes);
+
+const missionRoutes = require('./src/missions/mission_routes.js');
 app.use('/missions', missionRoutes);
+
+const volunteerRoutes = require('./src/volunteers/volunteer_routes.js');
 app.use('/volunteers', volunteerRoutes);
 
 //EXAMPLE 0
