@@ -7,10 +7,10 @@ const misqueries = require('../missions/mission_queries');
 const getReportbyId = (req, res) => {
     const id = parseInt(req.params.id);
     pool.query(queries.getReportbyId, [id], (error, result) => {
-        if (result.rowCount === 0) 
-            return res.status(404).json({message: "Report not found"})
         if(error) 
             return res.status(500).json({ error: "Internal error of the database" });
+        if (result.rowCount === 0) 
+            return res.status(404).json({message: "Report not found"})
         res.status(200).json(result.rows);
     })
 }
