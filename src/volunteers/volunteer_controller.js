@@ -44,7 +44,7 @@ const putVolunteer = (req, res) => {
     });
 };
 
-//EXERCISE 2
+//FinalAssignement
 const getVolunteerbyMission = (req,res) => {
     const mission_id = parseInt(req.params.id);
     pool.query(mission_queries.getMissionbyId, [mission_id], (errorM, resultM) => {
