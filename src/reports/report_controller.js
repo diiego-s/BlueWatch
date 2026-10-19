@@ -42,7 +42,26 @@ const postReport = (req, res) => {
     })
 }
 
+//EXERCISE 2
+const getReportbyVol = (req, res) => {
+    const volId = parseInt(req.params.id);
+    pool.query(volqueries.getVolunteerbyId, [volId], (errorV, resultV) => {
+        if(errorV)
+            return res.status(500).json({error: "Internal Server Error"});
+        if(resultV.rowCount === 0)
+            return res.status(404).json({message: "Volunteer not found!"});
+        pool.query(queries.getReportbyVol, [volId], (errorR, resultR) => {
+            if(errorR)
+                return res.status(500).json({error: "Internal Server Error"});
+            if(resultR.rowCount === 0)
+                return res.status(404).json({message: "There aren't reports for this volunteer"});
+            return res.status(200).json(resultR.rows);
+        })
+    })
+}
+
 module.exports = {
     getReportbyId,
-    postReport
+    postReport,
+    getReportbyVol
 };

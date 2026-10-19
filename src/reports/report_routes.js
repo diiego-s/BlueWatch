@@ -7,4 +7,6 @@ router.get('/:id', controller.getReportbyId);
 
 router.post('/', controller.postReport);
 
+router.get('/:id/volunteer', controller.getReportbyVol);
+
 module.exports = router;

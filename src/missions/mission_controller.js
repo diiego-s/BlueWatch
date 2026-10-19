@@ -28,10 +28,13 @@ const getMissionList = (req, res) => {
 const postMission = (req, res) => {
     const {id, title, location, status} = req.body;
     pool.query(queries.getMissionbyId, [id], (error1, result1) => {
-        if(error1) return res.status(500).json({error: "Internal Server Error"});
-        if(result1.rowCount > 0) return res.status(409).json({message: "Mission with same id already exists"});
+        if(error1) 
+            return res.status(500).json({error: "Internal Server Error"});
+        if(result1.rowCount > 0) 
+            return res.status(409).json({message: "Mission with same id already exists"});
         pool.query(queries.postMission, [id, title, location, status], (error2, result2) => {
-        if(error2) return res.status(500).json({error: "Internal Server Error"});
+            if(error2) 
+                return res.status(500).json({error: "Internal Server Error"});
             res.status(201).json({message: "Mission created!"});
         })
     })
