@@ -36,11 +36,27 @@ const postReport = (req, res) => {
                     return res.status(500).json({ error: "Internal error of the database" });
                 if(resultR.rowCount === 0) 
                     return res.status(400).json({error: "error creating report"});
-                else return res.status(201).json(resultR.rows[0]);
+                else return res.status(201).json({message: "Report created!"});
             })
         })
     })
 }
+
+/*
+//EXAMPLE 3 - SIMPLE
+const postReport = (req, res) => {
+    const {id, description, type, volunteerid, missionid} = req.body;
+    
+    pool.query(queries.postReport, [id, description, type, volunteerid, missionid], (errorR, resultR) => {
+        if(errorR) 
+            return res.status(500).json({message: "Error detail: " + errorR.detail});
+        if(resultR.rowCount === 0) 
+            return res.status(400).json({error: "error creating report"});
+        else return res.status(201).json({message: "Report created!"});
+    })
+}
+*/
+
 
 //EXERCISE 2
 const getReportbyVol = (req, res) => {
