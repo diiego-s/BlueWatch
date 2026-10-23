@@ -6,12 +6,16 @@ const queries = require('./report_queries');
 const volqueries = require('../volunteers/volunteer_queries');
 const misqueries = require('../missions/mission_queries');
 
+// ----------------------------------------------------------------------------------------------------------------------
+// ---------------- EXAMPLES -------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------
+
 //EXAMPLE 1
 // GET /reports/:id
 // Return the report with the id given in the URL
 const getReportbyId = (req, res) => {
-    const id = parseInt(req.params.id);
-    pool.query(queries.getReportbyId, [id], (error, result) => {
+    const idreport = parseInt(req.params.id);
+    pool.query(queries.getReportbyId, [idreport], (error, result) => {
         // Database error -> 500
         if(error) 
             return res.status(500).json({ error: "Internal error of the database" });
@@ -28,7 +32,7 @@ const getReportbyId = (req, res) => {
 // Create a new report, after checking that the given volunteer and mission exist
 const postReport = (req, res) => {
     // Extract the fields from the JSON body of the request
-    const {id, description, type, volunteerid, missionid} = req.body;
+    const {idreport, description, type, volunteerid, missionid} = req.body;
     
     // 1) Check that the volunteer exists
     pool.query(volqueries.getVolunteerbyId, [volunteerid], (errorV, resultV) => {
@@ -45,7 +49,7 @@ const postReport = (req, res) => {
                 return res.status(404).json({error: "Mission not found"});
 
             // 3) Both exist: insert the report
-            pool.query(queries.postReport, [id, description, type, volunteerid, missionid], (errorR, resultR) => {
+            pool.query(queries.postReport, [idreport, description, type, volunteerid, missionid], (errorR, resultR) => {
                 if(errorR) 
                     return res.status(500).json({ error: "Internal error of the database" });
                 // No row inserted -> 400 Bad Request
@@ -57,6 +61,11 @@ const postReport = (req, res) => {
         })
     })
 }
+
+// ----------------------------------------------------------------------------------------------------------------------
+// ---------------- EXERCISES -------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------
+
 
 // Simpler alternative version, left commented out: it inserts the report directly
 // without checking the volunteer and the mission first (if they don't exist, it is the
@@ -90,6 +99,7 @@ const getReportbyVol = (req, res) => {
         if(resultV.rowCount === 0)
             return res.status(404).json({message: "Volunteer not found!"});
         // Then look up that volunteer's reports
+        
         pool.query(queries.getReportbyVol, [volId], (errorR, resultR) => {
             if(errorR)
                 return res.status(500).json({error: "Internal Server Error"});

@@ -24,9 +24,9 @@ const getVolunteerbyId = (req, res) =>{
 // POST /volunteers
 // Create a new volunteer with the data received in the body
 const postVolunteer = (req, res) => {
-    const {id, name, surname} = req.body;
+    const {idvolunteer, name, surname} = req.body;
     // First check whether a volunteer with the same id already exists
-    pool.query(queries.getVolunteerbyId, [id], (errorC, resultC) => {
+    pool.query(queries.getVolunteerbyId, [idvolunteer], (errorC, resultC) => {
         // Id already taken -> 409 Conflict
         if(resultC.rowCount > 0) 
             return res.status(409).json({message: "Volunteer already exists"});
@@ -34,7 +34,7 @@ const postVolunteer = (req, res) => {
             return res.status(500).json({error: "Internal server error"});
     
         // Id is free: insert the volunteer
-        pool.query(queries.postVolunteer, [id, name, surname], (error, result) => {
+        pool.query(queries.postVolunteer, [idvolunteer, name, surname], (error, result) => {
             if(error) 
                 return res.status(500).json({error: "Internal server error"});
             // 201 Created
@@ -48,10 +48,10 @@ const postVolunteer = (req, res) => {
 // Update the name and surname of the volunteer given in the URL
 const putVolunteer = (req, res) => {
     // The id comes from the URL, the new values from the body
-    const id = parseInt(req.params.id);
+    const idvoluteer = parseInt(req.params.id);
     const {name, surname} = req.body;
 
-    pool.query(queries.putVolunteer, [name, surname, id], (error, result) => {
+    pool.query(queries.putVolunteer, [name, surname, idvolunteer], (error, result) => {
         if (error)
             return res.status(500).json({ error: "internal server error" });
         // No row updated: the volunteer does not exist -> 404
@@ -61,6 +61,10 @@ const putVolunteer = (req, res) => {
         return res.status(200).json(result.rows[0]);
     });
 };
+
+// ----------------------------------------------------------------------------------------------------------------------
+// ---------------- EXERCISES -------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------
 
 //FinalAssignement
 // GET /volunteers/:id/mission
@@ -85,6 +89,11 @@ const getVolunteerbyMission = (req,res) => {
         })
     })
 }
+
+// ----------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------
+
 
 module.exports = {
     getVolunteerbyId,
