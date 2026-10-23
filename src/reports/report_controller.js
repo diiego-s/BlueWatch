@@ -62,11 +62,6 @@ const postReport = (req, res) => {
     })
 }
 
-// ----------------------------------------------------------------------------------------------------------------------
-// ---------------- EXERCISES -------------------------------------------------------------------------------------------
-// ----------------------------------------------------------------------------------------------------------------------
-
-
 // Simpler alternative version, left commented out: it inserts the report directly
 // without checking the volunteer and the mission first (if they don't exist, it is the
 // database that rejects it through the foreign keys, and the error is returned to the client)
@@ -84,6 +79,10 @@ const postReport = (req, res) => {
     })
 }
 */
+
+// ----------------------------------------------------------------------------------------------------------------------
+// ---------------- EXERCISES -------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------
 
 
 //EXERCISE 2
@@ -103,8 +102,6 @@ const getReportbyVol = (req, res) => {
         pool.query(queries.getReportbyVol, [volId], (errorR, resultR) => {
             if(errorR)
                 return res.status(500).json({error: "Internal Server Error"});
-            if(resultR.rowCount === 0)
-                return res.status(404).json({message: "There aren't reports for this volunteer"});
             return res.status(200).json(resultR.rows);
         })
     })

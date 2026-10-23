@@ -5,20 +5,9 @@ const queries = require('./volunteer_queries');
 // Mission queries: used to check that the mission exists
 const mission_queries = require("../missions/mission_queries")
 
-// GET /volunteers/:id
-// Return the volunteer with the id given in the URL
-const getVolunteerbyId = (req, res) =>{
-    const id = parseInt(req.params.id);
-    pool.query(queries.getVolunteerbyId, [id], (error, result) => {
-        // No volunteer found -> 404
-        if(result.rowCount === 0) 
-            return res.status(404).json({message: "Volunteer not found"})
-        // Database error -> 500
-        if(error) 
-            return res.status(500).json({error: "Internal server error"});
-        return res.status(200).json(result.rows);
-    })
-}
+// ----------------------------------------------------------------------------------------------------------------------
+// ---------------- EXAMPLES -------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------
 
 //EXAMPLE 2
 // POST /volunteers
@@ -48,7 +37,7 @@ const postVolunteer = (req, res) => {
 // Update the name and surname of the volunteer given in the URL
 const putVolunteer = (req, res) => {
     // The id comes from the URL, the new values from the body
-    const idvoluteer = parseInt(req.params.id);
+    const idvolunteer = parseInt(req.params.id);
     const {name, surname} = req.body;
 
     pool.query(queries.putVolunteer, [name, surname, idvolunteer], (error, result) => {
@@ -94,6 +83,20 @@ const getVolunteerbyMission = (req,res) => {
 // ----------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------
 
+// GET /volunteers/:id
+// Return the volunteer with the id given in the URL
+const getVolunteerbyId = (req, res) =>{
+    const idvolunteer = parseInt(req.params.id);
+    pool.query(queries.getVolunteerbyId, [idvolunteer], (error, result) => {
+        // No volunteer found -> 404
+        if(result.rowCount === 0) 
+            return res.status(404).json({message: "Volunteer not found"})
+        // Database error -> 500
+        if(error)
+            return res.status(500).json({error: "Internal server error"});
+        return res.status(200).json(result.rows);
+    })
+}
 
 module.exports = {
     getVolunteerbyId,
