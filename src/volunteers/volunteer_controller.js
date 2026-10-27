@@ -55,18 +55,23 @@ const putVolunteer = (req, res) => {
 // ---------------- EXERCISES -------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------
 
-//FinalAssignement
+//FinalAssignment
 // GET /volunteers/:id/mission
 // Return the volunteers who wrote reports about the mission with that id
 // (the id in the URL is the mission's id)
+// TODO: uncomment the lines below and replace TODO with the correct answers
 const getVolunteerbyMission = (req,res) => {
-    const mission_id = parseInt(req.params.id);
+    /*
+    // TODO: extract the mission ID from the request parameters
+    const mission_id = parseInt(TODO);
     // First check that the mission exists
-    pool.query(mission_queries.getMissionbyId, [mission_id], (errorM, resultM) => {
+    // TODO: check if the mission with the ID extracted exist by using the query from mission_queries.js
+    pool.query(mission_queries.TODO, [mission_id], (errorM, resultM) => {
         if(errorM)
             return res.status(500).json({error: "Internal Server Error"});
         if(resultM.rowCount === 0)
             return res.status(404).json({message: "Mission not found"});
+
         // Then find the volunteers linked to that mission through the reports
         pool.query(queries.getVolunteerbyMission, [mission_id], (errorV, resultV) => {
             if(errorV)
@@ -77,6 +82,7 @@ const getVolunteerbyMission = (req,res) => {
                 return res.status(200).json(resultV.rows);
         })
     })
+    */
 }
 
 // ----------------------------------------------------------------------------------------------------------------------

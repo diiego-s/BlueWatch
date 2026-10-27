@@ -88,7 +88,9 @@ const postReport = (req, res) => {
 //EXERCISE 2
 // GET /reports/:id/volunteer
 // Return all reports written by a volunteer (the id in the URL is the volunteer's id)
+// TODO: uncomment the lines below and replace TODO with the correct answers
 const getReportbyVol = (req, res) => {
+    /*
     const volId = parseInt(req.params.id);
     // First check that the volunteer exists, to tell apart
     // "volunteer does not exist" from "volunteer has no reports"
@@ -99,12 +101,15 @@ const getReportbyVol = (req, res) => {
             return res.status(404).json({message: "Volunteer not found!"});
         // Then look up that volunteer's reports
         
-        pool.query(queries.getReportbyVol, [volId], (errorR, resultR) => {
+        // TODO: run the query to search all reports written by a volunteer
+        pool.query(queries.TODO, [volId], (errorR, resultR) => {
             if(errorR)
-                return res.status(500).json({error: "Internal Server Error"});
-            return res.status(200).json(resultR.rows);
+                // TODO: return the status code 500 and a JSON message
+                return res.status(TODO).json({error: "Internal Server Error"});
+            // TODO: return the status code 200 and a JSON message
+            return res.status(TODO).json(resultR.rows);
         })
-    })
+    })*/
 }
 
 module.exports = {

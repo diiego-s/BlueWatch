@@ -4,12 +4,14 @@ const controller = require('./mission_controller.js');
 
 const router = Router();
 
-
 // All paths are relative to the '/missions' prefix defined in server.js
 //EXERCISE 1
 // GET /missions/list -> list of all missions
 // Must be declared BEFORE '/:id', otherwise Express would treat "list" as an id
-router.get('/list', controller.getMissionList);
+// TODO: uncomment the line below and replace TODO with the route handler: controller.getMissionList
+/*
+router.get('/list', TODO);
+*/
 
 // Get a single mission by its id
 // GET /missions/:id -> a single mission (:id is a URL parameter, read with req.params.id)

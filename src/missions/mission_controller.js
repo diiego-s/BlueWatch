@@ -14,9 +14,9 @@ const getMissionList = (req, res) => {
     pool.query(queries.getMissionList, (error, result) => {
         // Empty table -> 404
         // Database error -> 500
-        if(error) 
+        if(error){
             return res.status(500).json({ error: "Internal error of the database" });
-        // Full list as JSON
+        }
         res.status(200).json(result.rows);
     });
 }
@@ -24,9 +24,12 @@ const getMissionList = (req, res) => {
 //EXERCISE 3
 // POST /missions
 // Create a new mission with the data received in the body
+// TODO: uncomment the lines below and replace TODO with the correct answers
 const postMission = (req, res) => {
-    // Extract the fields from the JSON body of the request
-    const {idmission, title, location, status} = req.body;
+    /*
+    // TODO: Extract the fields from the JSON body of the request
+    const {idmission, title, location, status} = req.TODO;
+
     // First check that no mission with the same id already exists
     pool.query(queries.getMissionbyId, [idmission], (error1, result1) => {
         if(error1) 
@@ -42,6 +45,7 @@ const postMission = (req, res) => {
             res.status(201).json({message: "Mission created!"});
         })
     })
+    */
 };
 
 // ----------------------------------------------------------------------------------------------------------------------

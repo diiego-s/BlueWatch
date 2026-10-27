@@ -13,6 +13,9 @@ router.get('/:id', controller.getReportbyId);
 router.post('/', controller.postReport);
 
 // GET /reports/:id/volunteer -> all reports written by the volunteer with that id
-router.get('/:id/volunteer', controller.getReportbyVol);
+// TODO: uncomment the line below and replace TODO with the route handler: controller.getReportbyVol
+/*
+router.get('/:id/volunteer', TODO);
+*/
 
 module.exports = router;
