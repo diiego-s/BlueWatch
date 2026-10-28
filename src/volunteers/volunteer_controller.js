@@ -3,7 +3,7 @@ const pool = require('../../db');
 // Queries for the volunteers table
 const queries = require('./volunteer_queries');
 // Mission queries: used to check that the mission exists
-const mission_queries = require("../missions/mission_queries")
+const mission_queries = require("../missions/mission_queries");
 
 // ----------------------------------------------------------------------------------------------------------------------
 // ---------------- EXAMPLES -------------------------------------------------------------------------------------------
@@ -54,18 +54,18 @@ const putVolunteer = (req, res) => {
 // ----------------------------------------------------------------------------------------------------------------------
 // ---------------- FINAL ASSIGNMENT ------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------
-
+// Name: "YOUR NAME AND SURNAME"
 // GET /volunteers/:id/mission
-// Return the volunteers who wrote reports about the mission with that id
-// (the id in the URL is the mission's id)
+// Return the volunteers who wrote reports about the mission with that id (the id in the URL is the mission's id)
 // TODO: uncomment the lines below and replace TODO with the correct answers
 const getVolunteerbyMission = (req,res) => {
     /*
+    const student = {"name": "YOUR NAME", "surname": "YOUR SURNAME"};
     // TODO: extract the mission ID from the request parameters
-    const mission_id = parseInt(TODO);
+    const mission_id = parseInt(req.params.id);
     // First check that the mission exists
     // TODO: check if the mission with the ID extracted exist by using the query from mission_queries.js
-    pool.query(mission_queries.TODO, [mission_id], (errorM, resultM) => {
+    pool.query(mission_queries.getMissionbyId, [mission_id], (errorM, resultM) => {
         if(errorM)
             return res.status(500).json({error: "Internal Server Error"});
         if(resultM.rowCount === 0)
@@ -78,7 +78,10 @@ const getVolunteerbyMission = (req,res) => {
             if(resultV.rowCount === 0) 
                 return res.status(404).json({message: "No Volunteer found for that mission"});
             else 
-                return res.status(200).json(resultV.rows);
+                return res.status(200).json({
+                    "student": student,
+                    "result": resultV.rows
+                });
         })
     })
     */
