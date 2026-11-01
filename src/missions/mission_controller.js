@@ -12,7 +12,6 @@ const queries = require('./mission_queries');
 // Return all missions
 const getMissionList = (req, res) => {
     pool.query(queries.getMissionList, (error, result) => {
-        // Empty table -> 404
         // Database error -> 500
         if(error){
             return res.status(500).json({ error: "Internal error of the database" });
