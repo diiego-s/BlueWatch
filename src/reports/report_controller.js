@@ -32,7 +32,7 @@ const getReportbyId = (req, res) => {
 // Create a new report, after checking that the given volunteer and mission exist
 const postReport = (req, res) => {
     // Extract the fields from the JSON body of the request
-    const {idreport, description, type, volunteerid, missionid} = req.body;
+    const {idreport, type, description, volunteerid, missionid} = req.body;
     
     // 1) Check that the volunteer exists
     pool.query(volqueries.getVolunteerbyId, [volunteerid], (errorV, resultV) => {
@@ -49,7 +49,7 @@ const postReport = (req, res) => {
                 return res.status(404).json({error: "Mission not found"});
 
             // 3) Both exist: insert the report
-            pool.query(queries.postReport, [idreport, description, type, volunteerid, missionid], (errorR, resultR) => {
+            pool.query(queries.postReport, [idreport, type, description, volunteerid, missionid], (errorR, resultR) => {
                 if(errorR) 
                     return res.status(500).json({ error: "Internal error of the database" });
                 // No row inserted -> 400 Bad Request
