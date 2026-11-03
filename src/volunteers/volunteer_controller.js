@@ -62,10 +62,10 @@ const getVolunteerbyMission = (req,res) => {
     /*
     const student = {"name": "YOUR NAME", "surname": "YOUR SURNAME"};
     // TODO: extract the mission ID from the request parameters
-    const mission_id = parseInt(req.params.id);
+    const mission_id = parseInt(TODO);
     // First check that the mission exists
     // TODO: check if the mission with the ID extracted exist by using the query from mission_queries.js
-    pool.query(mission_queries.getMissionbyId, [mission_id], (errorM, resultM) => {
+    pool.query(mission_queries.TODO, [mission_id], (errorM, resultM) => {
         if(errorM)
             return res.status(500).json({error: "Internal Server Error"});
         if(resultM.rowCount === 0)
